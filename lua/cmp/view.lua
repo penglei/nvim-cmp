@@ -62,7 +62,7 @@ view.open = function(self, ctx, sources)
 
   local group_indexes = vim.tbl_keys(source_group_map)
   table.sort(group_indexes, function(a, b)
-    return a ~= b and (a < b) or nil
+    return a ~= b and (a < b)
   end)
 
   local entries = {}
@@ -109,10 +109,7 @@ view.open = function(self, ctx, sources)
     local comparators = config.get().sorting.comparators
     table.sort(group_entries, function(e1, e2)
       for _, fn in ipairs(comparators) do
-        local diff = fn(e1, e2)
-        if diff ~= nil then
-          return diff
-        end
+        return fn(e1, e2)
       end
     end)
 
